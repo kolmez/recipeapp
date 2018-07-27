@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 
 @Component({
   selector: 'app-recipe',
@@ -14,9 +17,8 @@ export class RecipeComponent implements OnInit {
     this.name = 'spaghetti';
     this.ingredients = ['tomato', 'onion', 'celery', 'carrot', 'minced meat', 'pasta'];
     this.dateAdded = new Date();
-   }
-
-  ngOnInit() {
   }
+
+  ngOnInit() {}
 
 }
