@@ -12,7 +12,7 @@ export class RecipeComponent implements OnInit {
 
   constructor() {
     this.name = 'spaghetti';
-    this.ingredients = ['tomato', 'onion', 'celery', 'carrot', 'minced meat'];
+    this.ingredients = ['tomato', 'onion', 'celery', 'carrot', 'minced meat', 'pasta'];
     this.dateAdded = new Date();
    }
 
