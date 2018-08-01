@@ -3,14 +3,15 @@
     <app-add-recipe (newRecipe)="newRecipeAdded($event)"></app-add-recipe>
   </div>
   <div>
-      <input type='text' placeholder='filter recipe...' #filter>
-      <button (click)="applyFilter(filter.value)">filter</button>
+      <input (keyup)='filterRecipe$.next($event.target.value)' 
+      type='text' id='filter' name='filter' 
+      placeholder='filter recipe name...'>
     </div>
   <div class="ui segment">
       
     <div class="ui cards">
       <app-recipe *ngFor='let localRecipe of recipes | recipeFilter:filterRecipeName' 
-        [recipe]='localRecipe'></app-recipe>
+        [recipe]='localRecipe' (deleteRecipe)='removeRecipe($event)'></app-recipe>
     </div>
   </div>
 </div>
