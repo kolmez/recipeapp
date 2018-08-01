@@ -1,4 +1,5 @@
 require('./models/Recipe');
+require('./models/Ingredient');
 
 var createError = require('http-errors');
 var express = require('express');
