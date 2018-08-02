@@ -1,19 +1,14 @@
-import { Recipe } from './recipe/recipe.model';
-import { Component, OnInit } from '@angular/core';
-import { RecipeDataService } from './recipe/recipe-data.service';
-import { Subject } from 'rxjs';
-import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { AuthenticationService } from './user/authentication.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  providers: []
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+  constructor() {}
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
 }
