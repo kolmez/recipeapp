@@ -17,6 +17,12 @@ export class RecipeDataService {
       .pipe(map((list: any[]): Recipe[] => list.map(Recipe.fromJSON)));
   }
 
+  getRecipe(id: string): Observable<Recipe> {
+    return this.http
+      .get(`${this._appUrl}/recipe/${id}`)
+      .pipe(map(Recipe.fromJSON));
+  }
+
   addNewRecipe(recipe: Recipe): Observable<Recipe> {
     return this.http
       .post(`${this._appUrl}/recipes/`, recipe)

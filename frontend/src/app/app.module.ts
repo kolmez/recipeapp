@@ -22,7 +22,6 @@ import { RecipeModule } from './recipe/recipe.module';
   ],
   imports: [
     BrowserModule,
-    RecipeModule,
     AppRoutingModule
   ],
   bootstrap: [AppComponent]
