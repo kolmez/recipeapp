@@ -6,6 +6,6 @@ var RecipeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Ingredient'
   }],
-  created: Date,
+  created: { type: Date, default: Date.now }
 });
 mongoose.model('Recipe', RecipeSchema);
