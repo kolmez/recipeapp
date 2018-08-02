@@ -31,7 +31,7 @@ export class AddRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.recipe = this.fb.group({
-      name: ['risotto', [Validators.required, Validators.minLength(2)]],
+      name: ['', [Validators.required, Validators.minLength(2)]],
       ingredients: this.fb.array([this.createIngredients()])
     });
 

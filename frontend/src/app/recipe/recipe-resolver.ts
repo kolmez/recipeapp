@@ -8,8 +8,10 @@ import { RecipeDataService } from './recipe-data.service';
 export class RecipeResolver implements Resolve<Recipe> {
     constructor(private recipeService: RecipeDataService) {}
 
-    resolve(route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<Recipe> {
+    resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<Recipe> {
             return this.recipeService.getRecipe(route.params['id']);
 }
 }

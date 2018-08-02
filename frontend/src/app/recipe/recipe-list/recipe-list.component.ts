@@ -1,19 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../recipe.model';
 import { RecipeDataService } from '../recipe-data.service';
+import { Recipe } from '../recipe.model';
+import { Subject } from '../../../../node_modules/rxjs';
+import { distinctUntilChanged, debounceTime, map } from '../../../../node_modules/rxjs/operators';
+import { HttpErrorResponse } from '../../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css']
 })
+
 export class RecipeListComponent implements OnInit {
+  public filterRecipeName: string;
+  public filterRecipe$ = new Subject<string>();
+
+  public errorMsg: string;
+
   private _recipes: Recipe[];
 
-  constructor(private _recipeDataService: RecipeDataService) { }
-
-  ngOnInit() {
-    this._recipeDataService.recipes.subscribe(items => this._recipes = items);
+  constructor(private _recipeDataService: RecipeDataService) {
+    this.filterRecipe$
+      .pipe(
+        distinctUntilChanged(),
+        debounceTime(400),
+        map(val => val.toLowerCase())
+      )
+      .subscribe(val => (this.filterRecipeName = val));
   }
 
+  ngOnInit(): void {
+    this._recipeDataService.recipes.subscribe(
+      recipes => (this._recipes = recipes),
+      (error: HttpErrorResponse) => {
+        this.errorMsg = `Error ${
+          error.status
+        } while trying to retrieve recipes: ${error.error}`;
+      }
+    );
+  }
+
+  get recipes() {
+    return this._recipes;
+  }
+
+  removeRecipe(recipe: Recipe) {
+    this._recipeDataService.removeRecipe(recipe).subscribe(
+      item => (this._recipes = this._recipes.filter(val => item.id !== val.id)),
+      (error: HttpErrorResponse) => {
+        this.errorMsg = `Error ${error.status} while removing recipes for ${
+          recipe.name
+        }: ${error.error}`;
+      }
+    );
+  }
 }
